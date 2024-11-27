@@ -1,26 +1,52 @@
-//LEGGERE LE ISTRUZIONI NEL FILE README.md
-
-//Import di Classi Java necessarie al funzionamento del programma
 import java.util.Scanner;
+import java.util.ArrayList;
 
-// Classe principale, con metodo main
-class Esercizio {
-    // Il programma parte con una chiamata a main().
-    public static void main(String args[])
-    {
-        //Variabili del programma
-        String nome;
+public class Esercizio {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n;
+        System.out.println("Inserire il numero di giri: ");
+        n = scanner.nextInt();
+        ArrayList<Float> hamilton = new ArrayList<>(n);
+        ArrayList<Float> verstappen = new ArrayList<>(n);
+        for (int i = 0; i < n; i++) {
+            System.out.print("Inserisci il tempo del " + (i + 1) + "° giro di Hamilton: ");
+            hamilton.add(scanner.nextFloat());
+            System.out.print("Inserisci il tempo del " + (i + 1) + "° giro di Verstappen: ");
+            verstappen.add(scanner.nextFloat());
+        }
+        float tempoGaraH = 0;
+        float tempoGaraV = 0;
+        for (int i = 0; i < n; i++) {
+            tempoGaraH += hamilton.get(i);
+            tempoGaraV += verstappen.get(i);
+        }
+        String vincitore;
 
-        //Creo l'oggetto in per l'input da tastiera
-        Scanner in = new Scanner( System.in );
-
-        //Leggo l'input da tastiera
-        System.out.print("Inserisci il tuo nome: ");
-        nome = in.nextLine();
-
-        //Output del nome acquisito da tastiera
-        System.out.println("Ciao "+nome+"!");
+        if (tempoGaraH < tempoGaraV) {
+            vincitore = "Hamilton";
+        } else {
+            vincitore = "Verstappen";
+        }
+        System.out.println("Tempo Hamilton: " + tempoGaraH + ", tempo Verstappen: " + tempoGaraV);
+        System.out.println("Vincitore della gara: " + vincitore);
+        float tMinV = verstappen.get(0);
+        float tMinH = hamilton.get(0);
+        for (int i = 0; i < n; i++) {
+            if (hamilton.get(i) < tMinH) {
+                tMinH = hamilton.get(i);
+            }
+            if (verstappen.get(i) < tMinV) {
+                tMinV = verstappen.get(i);
+            }
+        }
+        if (tMinH < tMinV) {
+            vincitore = "Hamilton";
+        } else {
+            vincitore = "Verstappen";
+        }
+        System.out.println("Giro veloce Hamilton: " + tMinH + ", giro veloce Verstappen: " + tMinV);
+        System.out.println("Il giro più veloce è di " + vincitore);
     }
 }
-
 //LEGGERE LE ISTRUZIONI NEL FILE README.md
